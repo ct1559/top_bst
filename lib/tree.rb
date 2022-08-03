@@ -48,10 +48,14 @@ class Tree
   def postorder
   end
 
-  def height(node)
+  def depth(node, current_depth = 0)
+    return current_depth if node.nil?
+    return current_depth if node.right.nil? && node.left.nil?
+
+    [depth(node.left, current_depth + 1), depth(node.right, current_depth + 1)].max
   end
 
-  def depth(node)
+  def height(node, current_height = 0)
   end
 
   def balanced?
