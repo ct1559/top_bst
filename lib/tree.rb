@@ -60,7 +60,17 @@ class Tree
     end
   end
 
-  def height(node, current_height = 0)
+  def depth_largest(node = @root, current_depth = 0)
+    return current_depth if node.nil?
+    return current_depth if node.left.nil? && node.right.nil?
+
+    [depth_largest(node.left, current_depth + 1), depth_largest(node.right, current_depth + 1)].max
+  end
+
+  def height(node)
+    return "Node: #{node} not found in tree" if find(node.value).is_a?(String)
+
+    depth_largest - depth(node)
   end
 
   def balanced?
