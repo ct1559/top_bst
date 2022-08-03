@@ -27,15 +27,15 @@ class Tree
   def delete
   end
 
-  def find(value, root = @root)
-    if root.nil? || root.value.nil?
+  def find(value, node = @root)
+    if node.nil? || node.value.nil?
       "Value: '#{value}' is not in the list."
-    elsif value == root.value
-      root
-    elsif value < root.value
-      find(value, root.left)
+    elsif value == node.value
+      node
+    elsif value < node.value
+      find(value, node.left)
     else
-      find(value, root.right)
+      find(value, node.right)
     end
   end
 
@@ -48,11 +48,16 @@ class Tree
   def postorder
   end
 
-  def depth(node, current_depth = 0)
-    return current_depth if node.nil?
-    return current_depth if node.right.nil? && node.left.nil?
+  def depth(node, current_node = @root, current_depth = 0)
+    return "Node: #{node} not found in tree" if find(node.value).is_a?(String)
 
-    [depth(node.left, current_depth + 1), depth(node.right, current_depth + 1)].max
+    if node == current_node
+      current_depth
+    elsif node.value < current_node.value
+      depth(node, current_node.left, current_depth + 1)
+    else
+      depth(node, current_node.right, current_depth + 1)
+    end
   end
 
   def height(node, current_height = 0)

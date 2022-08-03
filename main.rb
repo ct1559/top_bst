@@ -11,7 +11,7 @@ def run_tests
   puts bst.find(arr[0])
   puts bst.find(101)
   puts bst.find(rand(1..100))
-  puts "Height of node is: #{bst.depth(bst.root)}"
+  puts "Depth of #{bst.find(arr[0])} with value: #{bst.find(arr[0]).value}, is: #{bst.depth(bst.find(arr[0]))}"
 
   arr_2 = (Array.new(20) { rand(1..100) })
   puts 'The array passed into tree:'
@@ -21,7 +21,7 @@ def run_tests
   puts bst_2.find(arr[0])
   puts bst_2.find(101)
   puts bst_2.find(rand(1..100))
-  puts "Depth of node is: #{bst_2.depth(bst_2.root)}"
+  puts "Depth of #{bst_2.find(arr_2[0])} with value: #{bst_2.find(arr_2[0]).value}, is: #{bst_2.depth(bst_2.find(arr_2[0]))}"
 end
 
 run_tests
