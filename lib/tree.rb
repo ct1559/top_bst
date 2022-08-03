@@ -21,10 +21,30 @@ class Tree
     root_node
   end
 
-  def insert
+  def insert(value, node = @root)
+    return Node.new(value) if node.nil?
+    return if value == node.value
+
+    if leaf?(node)
+      if value < node.value
+        node.left = Node.new(value)
+      else
+        node.right = Node.new(value)
+      end
+    else
+      if value < node.value
+        return node.left = Node.new(value) if node.left.value.nil?
+
+        insert(value, node.left)
+      else
+        return node.right = Node.new(value) if node.right.value.nil? 
+
+        insert(value, node.right)
+      end
+    end
   end
 
-  def delete
+  def delete(value, node = @root)
   end
 
   def find(value, node = @root)
@@ -74,9 +94,14 @@ class Tree
   end
 
   def balanced?
+    ((depth_largest(@root.left) - depth(@root.left)) - (depth_largest(@root.right) - depth(@root.right))).abs <= 1
   end
 
   def rebalance
+  end
+
+  def leaf?(node)
+    node.left.nil? && node.right.nil?
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
