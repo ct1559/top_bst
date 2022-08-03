@@ -28,7 +28,7 @@ class Tree
   end
 
   def find(value, root = @root)
-    if root.value.nil?
+    if root.nil? || root.value.nil?
       "Value: '#{value}' is not in the list."
     elsif value == root.value
       root
