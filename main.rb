@@ -20,6 +20,10 @@ def run_tests
   bst.insert(136)
   bst.pretty_print
   puts "Tree is balanced: #{bst.balanced?}"
+  puts "Deleting #{arr[0]} from tree"
+  bst.delete(arr[0])
+  bst.pretty_print
+
 
   # arr_2 = (Array.new(20) { rand(1..100) })
   # puts 'The array passed into tree:'
