@@ -97,6 +97,9 @@ class Tree
     end
   end
 
+  def level_order(&block)
+  end
+
   def inorder
   end
 
