@@ -98,6 +98,16 @@ class Tree
   end
 
   def level_order(&block)
+    queue = [@root]
+    values = []
+    puts "Block given: #{block_given?}"
+    until queue.empty?
+      node = queue.shift
+      block_given? ? values << block.call(node.value) : values << node.value
+      queue << node.left unless node.left.nil?
+      queue << node.right unless node.right.nil?
+    end
+    values
   end
 
   def inorder

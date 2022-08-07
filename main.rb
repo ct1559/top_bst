@@ -6,20 +6,31 @@ def run_tests
   arr = (Array.new(15) { rand(1..100) })
   puts 'The array passed into tree:'
   p arr.sort.uniq
+  # Build tree test
   bst = Tree.new(arr)
   bst.pretty_print
+  # Find test
   puts bst.find(arr[0])
   puts bst.find(101)
   puts bst.find(rand(1..100))
+  # Depth, Height and Balance test
   puts "Depth of #{bst.find(arr[0])} with value: #{bst.find(arr[0]).value}, is: #{bst.depth(bst.find(arr[0]))}"
   puts "Height of #{bst.find(arr[0])} is #{bst.height(bst.find(arr[0]))}"
   puts "Tree is balanced: #{bst.balanced?}"
+  # Level order test
+  puts 'Level Order values:'
+  p bst.level_order
+  sum = 0
+  puts 'Level order with block given:'
+  p bst.level_order { |value| sum += value}
+  # Insert test
   bst.insert(101)
   bst.insert(160)
   bst.insert(110)
   bst.insert(136)
   bst.pretty_print
   puts "Tree is balanced: #{bst.balanced?}"
+  # Delete test
   puts "Deleting #{arr[0]} from tree"
   bst.delete(arr[0])
   bst.pretty_print
