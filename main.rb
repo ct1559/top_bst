@@ -34,22 +34,27 @@ def run_tests
   puts "\nPre order values"
   p bst.preorder
   # Post order test
-  puts 'Post order values'
+  puts "\nPost order values"
   p bst.postorder
   # Insert test
   bst.insert(101)
   bst.insert(160)
   bst.insert(110)
   bst.insert(136)
-  puts "\nAfter inserting values:\n"
+  puts "\nAfter inserting values:\n\n"
   bst.pretty_print
-  puts "Tree is balanced: #{bst.balanced?}"
+  puts "\nTree is balanced: #{bst.balanced?}"
   # Delete test
-  puts "Deleting #{arr[0]} from tree"
+  puts "Deleting #{arr[0]} from tree\n\n"
   bst.delete(arr[0])
   bst.pretty_print
+  # Rebalance test
+  puts "\nRebalance tree:\n\n"
+  bst.rebalance
+  puts bst.pretty_print
+  puts "\nTree is balanced: #{bst.balanced?}"
 
-
+  # Second array tests:
   # arr_2 = (Array.new(20) { rand(1..100) })
   # puts 'The array passed into tree:'
   # p arr_2.sort.uniq

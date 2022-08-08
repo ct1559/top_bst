@@ -111,25 +111,29 @@ class Tree
 
   def inorder(node = @root, values = [], &block)
     return if node.nil?
-    inorder(node.left, values)
+
+    inorder(node.left, values, &block)
     block_given? ? values << block.call(node.value) : values << node.value
-    inorder(node.right, values)
+    inorder(node.right, values, &block)
     values
   end
 
   def preorder(node = @root, values = [], &block)
     return if node.nil?
+
     block_given? ? values << block.call(node.value) : values << node.value
-    preorder(node.left, values)
-    preorder(node.right, values)
+    preorder(node.left, values, &block)
+    preorder(node.right, values, &block)
     values
   end
 
   def postorder(node = @root, values = [], &block)
     return if node.nil?
-    postorder(node.left, values)
-    postorder(node.right, values)
+
+    postorder(node.left, values, &block)
+    postorder(node.right, values, &block)
     block_given? ? values << block.call(node.value) : values << node.value
+    values
   end
 
   def depth(node, current_node = @root, current_depth = 0)
@@ -162,6 +166,7 @@ class Tree
   end
 
   def rebalance
+    @root = build_tree(level_order.sort)
   end
 
   def leaf?(node)
