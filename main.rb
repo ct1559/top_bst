@@ -8,26 +8,40 @@ def run_tests
   p arr.sort.uniq
   # Build tree test
   bst = Tree.new(arr)
+  puts "\n"
   bst.pretty_print
   # Find test
+  puts "\nFind tests"
   puts bst.find(arr[0])
   puts bst.find(101)
   puts bst.find(rand(1..100))
   # Depth, Height and Balance test
-  puts "Depth of #{bst.find(arr[0])} with value: #{bst.find(arr[0]).value}, is: #{bst.depth(bst.find(arr[0]))}"
+  puts "\nDepth of #{bst.find(arr[0])} with value: #{bst.find(arr[0]).value}, is: #{bst.depth(bst.find(arr[0]))}"
   puts "Height of #{bst.find(arr[0])} is #{bst.height(bst.find(arr[0]))}"
   puts "Tree is balanced: #{bst.balanced?}"
   # Level order test
-  puts 'Level Order values:'
+  puts "\nLevel order values:"
   p bst.level_order
   sum = 0
   puts 'Level order with block given:'
   p bst.level_order { |value| sum += value}
+  # In order test
+  puts "\nIn order values"
+  p bst.inorder
+  puts 'In order with block given'
+  p bst.inorder { |value| "-#{value}-"}
+  # Pre order test
+  puts "\nPre order values"
+  p bst.preorder
+  # Post order test
+  puts 'Post order values'
+  p bst.postorder
   # Insert test
   bst.insert(101)
   bst.insert(160)
   bst.insert(110)
   bst.insert(136)
+  puts "\nAfter inserting values:\n"
   bst.pretty_print
   puts "Tree is balanced: #{bst.balanced?}"
   # Delete test

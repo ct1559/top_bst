@@ -100,7 +100,6 @@ class Tree
   def level_order(&block)
     queue = [@root]
     values = []
-    puts "Block given: #{block_given?}"
     until queue.empty?
       node = queue.shift
       block_given? ? values << block.call(node.value) : values << node.value
@@ -110,13 +109,27 @@ class Tree
     values
   end
 
-  def inorder
+  def inorder(node = @root, values = [], &block)
+    return if node.nil?
+    inorder(node.left, values)
+    block_given? ? values << block.call(node.value) : values << node.value
+    inorder(node.right, values)
+    values
   end
 
-  def preorder
+  def preorder(node = @root, values = [], &block)
+    return if node.nil?
+    block_given? ? values << block.call(node.value) : values << node.value
+    preorder(node.left, values)
+    preorder(node.right, values)
+    values
   end
 
-  def postorder
+  def postorder(node = @root, values = [], &block)
+    return if node.nil?
+    postorder(node.left, values)
+    postorder(node.right, values)
+    block_given? ? values << block.call(node.value) : values << node.value
   end
 
   def depth(node, current_node = @root, current_depth = 0)
